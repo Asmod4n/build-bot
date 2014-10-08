@@ -1,4 +1,4 @@
-language: ruby
+﻿language: ruby
 
 rvm:
   - ruby-head-clang

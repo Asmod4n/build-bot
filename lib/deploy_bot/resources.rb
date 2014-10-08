@@ -4,7 +4,9 @@ Dir["#{File.expand_path('../resources', __FILE__)}/*"].each do |resource|
 end
 
 module DeployBot
-  Application.routes do
-    add ['github'], GithubResource
+  module Resources
+    Application.routes do
+      add ['github'], Github
+    end
   end
 end
