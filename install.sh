@@ -1,4 +1,6 @@
 #!/bin/sh
+sudo apt-get build-dep libzmq3-dev libzmq1
+sudo apt-get -y install build-essential automake autoconf
 git clone git://github.com/jedisct1/libsodium.git
 cd libsodium
 ./autogen.sh
