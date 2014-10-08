@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+#!/bin/sh
 git clone git://github.com/jedisct1/libsodium.git
 cd libsodium
 ./autogen.sh
