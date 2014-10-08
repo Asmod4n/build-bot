@@ -1,4 +1,6 @@
-﻿require 'octokit'
+﻿require 'faraday-http-cache'
+require 'typhoeus'
+require 'octokit'
 require 'webmachine'
 require 'openssl'
 require 'multi_json'
