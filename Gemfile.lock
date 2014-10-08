@@ -63,6 +63,7 @@ DEPENDENCIES
   jrjackson
   multi_json
   pry
+  rack
   rake
   rspec
   torquebox (= 4.x.incremental.221)
