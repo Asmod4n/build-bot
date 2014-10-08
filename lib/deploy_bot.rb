@@ -1,0 +1,6 @@
+﻿module DeployBot
+end
+
+require_relative 'deploy_bot/version'
+require_relative 'deploy_bot/application'
+require_relative 'deploy_bot/resources'

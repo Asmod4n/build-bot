@@ -1,0 +1,72 @@
+PATH
+  remote: .
+  specs:
+    deploy_bot (0.0.1)
+      bundler (>= 1.7)
+
+GEM
+  remote: https://rubygems.org/
+  remote: http://torquebox.org/4x/builds/gem-repo/
+  specs:
+    as-notifications (1.0.1)
+    coderay (1.1.0)
+    diff-lcs (1.2.5)
+    ffi (1.9.5-java)
+    i18n (0.6.11)
+    jrjackson (0.2.7)
+    method_source (0.8.2)
+    multi_json (1.10.1)
+    pry (0.10.1-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
+    rack (1.5.2)
+    rake (10.3.2)
+    rspec (3.1.0)
+      rspec-core (~> 3.1.0)
+      rspec-expectations (~> 3.1.0)
+      rspec-mocks (~> 3.1.0)
+    rspec-core (3.1.5)
+      rspec-support (~> 3.1.0)
+    rspec-expectations (3.1.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.1.0)
+    rspec-mocks (3.1.2)
+      rspec-support (~> 3.1.0)
+    rspec-support (3.1.1)
+    slop (3.6.0)
+    spoon (0.0.4)
+      ffi
+    torquebox (4.x.incremental.221-java)
+      torquebox-core (= 4.x.incremental.221)
+      torquebox-scheduling (= 4.x.incremental.221)
+      torquebox-web (= 4.x.incremental.221)
+    torquebox-core (4.x.incremental.221-java)
+    torquebox-scheduling (4.x.incremental.221-java)
+      torquebox-core (= 4.x.incremental.221)
+    torquebox-web (4.x.incremental.221-java)
+      rack (>= 1.4.0, < 2.0)
+      torquebox-core (= 4.x.incremental.221)
+    webmachine (1.2.2)
+      as-notifications (~> 1.0)
+      i18n (>= 0.4.0)
+      multi_json
+    webmachine-test (0.2.1)
+      webmachine
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  deploy_bot!
+  jrjackson
+  multi_json
+  pry
+  rake
+  rspec
+  torquebox (= 4.x.incremental.221)
+  webmachine
+  webmachine-test
+  yahns
+  yajl-ruby
