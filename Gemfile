@@ -1,5 +1,4 @@
 ﻿source 'https://rubygems.org'
-source 'http://torquebox.org/4x/builds/gem-repo/'
 
 gemspec
 
@@ -17,6 +16,7 @@ platforms :ruby do
 end
 
 platforms :jruby do
+  source 'http://torquebox.org/4x/builds/gem-repo/'
   gem 'jrjackson'
   gem 'torquebox', '4.x.incremental.221', group: :production
 end
