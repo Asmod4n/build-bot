@@ -9,7 +9,7 @@ module DeployBot
       end
 
       def process_post
-        MultiJson.load(request.body.to_s)
+        puts MultiJson.load(request.body.to_s)
         true
       end
     end

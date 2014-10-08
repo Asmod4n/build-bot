@@ -1,7 +1,6 @@
 ﻿module DeployBot
   module Utils
     module_function
-# :nocov:
     def constantize(camel_cased_word)
       names = camel_cased_word.split('::')
       names.shift if names.empty? || names.first.empty?
@@ -27,6 +26,5 @@
         end
       end
     end
- # :nocov:
   end
 end
