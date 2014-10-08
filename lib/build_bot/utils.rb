@@ -1,4 +1,4 @@
-﻿module DeployBot
+﻿module BuildBot
   module Utils
     module_function
     def constantize(camel_cased_word)

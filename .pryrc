@@ -1,2 +1,2 @@
 ﻿require 'bundler/setup'
-require 'deploy_bot'
+require 'build_bot'

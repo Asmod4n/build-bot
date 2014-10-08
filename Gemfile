@@ -21,6 +21,9 @@ platforms :jruby do
   gem 'torquebox', '4.x.incremental.221', group: :production
 end
 
+gem 'typhoeus'
+gem 'faraday-http-cache'
+gem 'octokit'
 gem 'multi_json'
 gem 'webmachine'
 gem 'webmachine-test'

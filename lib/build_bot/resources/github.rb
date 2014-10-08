@@ -1,14 +1,26 @@
-﻿require_relative '../resource'
+﻿require 'faraday/http_cache'
+require 'typhoeus/adapters/faraday'
+require 'octokit'
+require_relative '../resource'
 require 'openssl'
 require 'multi_json'
 
-module DeployBot
+stack = Faraday::RackBuilder.new do |builder|
+  builder.use :http_cache
+  builder.use Octokit::Response::RaiseError
+  builder.adapter :typhoeus
+end
+Octokit.middleware = stack
+
+$octokit = Octokit::Client.new(:access_token => ENV['OCTOKIT_ACCESS_TOKEN'])
+
+module BuildBot
   module Resources
     class Github < Resource
       DIGEST = 'sha1'.freeze
       HMAC_DIGEST = OpenSSL::Digest.new(DIGEST)
       SECRET = ENV['GITHUB_SECRET']
-      X_HUB_SIGNATURE = 'X-Hub-Signature'.freeze
+      X_HUB_SIGNATURE = 'x-hub-signature'.freeze
 
       def allowed_methods
         [:POST.to_s]

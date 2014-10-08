@@ -1,4 +1,4 @@
-require 'bundler/setup'
-require 'deploy_bot'
+﻿require 'bundler/setup'
+require 'build_bot'
 
-run DeployBot::Application.adapter
+run BuildBot::Application.adapter

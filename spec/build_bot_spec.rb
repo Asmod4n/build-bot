@@ -1,25 +1,25 @@
 ﻿require 'spec_helper'
 
-describe DeployBot do
+describe BuildBot do
   include Webmachine::Test
 
-  describe DeployBot::Utils do
+  describe BuildBot::Utils do
     describe '::constantize' do
       it 'Constantizes Strings' do
-        expect(DeployBot::Utils::constantize('DeployBot::Utils')).to eq DeployBot::Utils
+        expect(BuildBot::Utils::constantize('BuildBot::Utils')).to eq BuildBot::Utils
       end
     end
   end
 
-  let(:app) { DeployBot::Application }
+  let(:app) { BuildBot::Application }
 
-  describe DeployBot::Application do
+  describe BuildBot::Application do
     it 'is a Webmachine::Application' do
       expect(described_class).to be_a Webmachine::Application
     end
   end
 
-  describe DeployBot::Resource do
+  describe BuildBot::Resource do
     include_context "default resource"
 
     it 'is a Webmachine::Resource' do
@@ -27,7 +27,7 @@ describe DeployBot do
     end
   end
 
-  describe DeployBot::Resources::Github do
+  describe BuildBot::Resources::Github do
     it 'processes JSON' do
       bod = '{}'
       signature = OpenSSL::HMAC.hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, bod)

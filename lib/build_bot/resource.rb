@@ -1,6 +1,6 @@
 ﻿require 'webmachine/resource'
 
-module DeployBot
+module BuildBot
   class Resource < Webmachine::Resource
   end
 end
