@@ -38,9 +38,7 @@ module BuildBot
         @payload = MultiJson.load(@body)
         case request.headers[X_GITHUB_EVENT]
         when 'pull-request'
-          if @payload['action'] == 'opened'
-            process_pull_request
-          end
+          puts @payload['action']
         end
         true
       end
