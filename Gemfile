@@ -6,6 +6,7 @@ gemspec
 gem 'pry', group: :development
 
 group :test do
+	gem 'rack'
 	gem 'rake'
 	gem 'rspec'
 end
