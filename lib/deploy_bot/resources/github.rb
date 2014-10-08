@@ -1,9 +1,9 @@
-﻿require 'webmachine/resource'
+﻿require_relative '../resource'
 require 'multi_json'
 
 module DeployBot
   module Resources
-    class Github < Webmachine::Resource
+    class Github < Resource
       def allowed_methods
         [:POST.to_s]
       end
