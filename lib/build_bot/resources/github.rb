@@ -46,10 +46,6 @@ module BuildBot
       private
 
       def process_pull_request
-        $octokit.create_status(@payload['pull_request']['base']['repo']['full_name'], @payload['pull_request']['head']['sha'], 'pending')
-        puts system "rake"
-
-        $octokit.create_status(@payload['pull_request']['base']['repo']['full_name'], @payload['pull_request']['head']['sha'], 'success')
       end
     end
   end
