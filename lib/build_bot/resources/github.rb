@@ -20,6 +20,8 @@ module BuildBot
       HMAC_DIGEST = OpenSSL::Digest.new(DIGEST)
       SECRET = ENV['GITHUB_SECRET']
       X_HUB_SIGNATURE = 'x-hub-signature'.freeze
+      X_GITHUB_EVENT = 'x-github-event'.freeze
+
 
       def allowed_methods
         [:POST.to_s]
@@ -33,8 +35,25 @@ module BuildBot
       end
 
       def process_post
-        payload = MultiJson.load(@body)
+        @payload = MultiJson.load(@body)
+        case request.headers[X_GITHUB_EVENT]
+        when 'pull-request'
+          if @payload['action'] == 'opened'
+            process_pull_request
+          end
+        end
         true
+      end
+
+      private
+
+      def process_pull_request
+        $octokit.create_status (@payload['pull_request']['base']['repo']['full_name'],
+                                @payload['pull_request']['head']['sha'], 'pending')
+        puts system "rake"
+
+        $octokit.create_status (@payload['pull_request']['base']['repo']['full_name'],
+                                @payload['pull_request']['head']['sha'], 'success')
       end
     end
   end
