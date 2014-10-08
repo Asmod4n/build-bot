@@ -1,4 +1,8 @@
-﻿module DeployBot
+﻿require 'webmachine'
+require 'openssl'
+require 'multi_json'
+
+module DeployBot
 end
 
 require_relative 'deploy_bot/version'

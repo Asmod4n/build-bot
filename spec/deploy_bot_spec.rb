@@ -29,7 +29,10 @@ describe DeployBot do
 
   describe DeployBot::Resources::Github do
     it 'processes JSON' do
-      body('{}')
+      bod = '{}'
+      signature = OpenSSL::HMAC.hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, bod)
+      header(described_class::X_HUB_SIGNATURE, "#{described_class::DIGEST}=#{signature}")
+      body(bod)
       post('/github')
       expect(response.body).to be_nil
       expect(response.code).to eq 204
