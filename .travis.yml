@@ -11,3 +11,6 @@ rvm:
   - jruby-1.7.11
 
 jdk: oraclejdk8
+
+before_install:
+  - ./install.sh

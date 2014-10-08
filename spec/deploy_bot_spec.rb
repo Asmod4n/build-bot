@@ -15,7 +15,7 @@ describe DeployBot do
     it 'processes JSON' do
       body('{}')
       post('/github')
-      expect(response.body).to eq nil
+      expect(response.body).to be_nil
       expect(response.code).to eq 204
     end
   end

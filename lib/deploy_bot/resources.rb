@@ -1,12 +1,14 @@
 ﻿require_relative 'application'
-Dir["#{File.expand_path('../resources', __FILE__)}/*"].each do |resource|
-  require resource
-end
+require_relative 'utils'
 
 module DeployBot
-  module Resources
-    Application.routes do
-      add ['github'], Github
+  Application.routes do
+    Dir.chdir(File.expand_path('../resources', __FILE__)) do
+      Dir['*.rb'].each do |resource|
+        require_relative "resources/#{resource}"
+        path = File.basename(resource, '.rb')
+        add [path], Utils.constantize("DeployBot::Resources::#{path.capitalize}")
+      end
     end
   end
 end
