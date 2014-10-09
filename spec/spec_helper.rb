@@ -1,6 +1,8 @@
 ﻿require 'bundler/setup'
-require 'build_bot'
 require 'webmachine/test'
+require 'coveralls'
+Coveralls.wear!
+require 'build_bot'
 
 RSpec.configure do |config|
   config.color = true

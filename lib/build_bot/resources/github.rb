@@ -28,10 +28,8 @@ module BuildBot
 
       def process_post
         @payload = MultiJson.load(@body)
-        case request.headers[X_GITHUB_EVENT]
-        when 'pull-request'
-          puts @payload['action']
-        end
+        puts request.headers[X_GITHUB_EVENT]
+        puts @payload
         true
       end
 
