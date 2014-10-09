@@ -16,3 +16,6 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
+
+notifications:
+  webhooks: https://xn--honsh-pfb.beskow.de/travis
