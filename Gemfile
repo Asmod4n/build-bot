@@ -1,5 +1,5 @@
 ﻿source 'https://rubygems.org'
-
+source 'http://torquebox.org/4x/builds/gem-repo/'
 gemspec
 
 gem 'pry', group: :development
@@ -20,7 +20,7 @@ end
 platforms :jruby do
   gem 'jruby-openssl'
   gem 'jrjackson'
-  gem 'torquebox', '4.x.incremental.221', group: :production, source: 'http://torquebox.org/4x/builds/gem-repo/'
+  gem 'torquebox', '4.x.incremental.221', group: :production
 end
 
 gem 'octokit'

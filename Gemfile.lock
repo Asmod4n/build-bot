@@ -100,7 +100,7 @@ DEPENDENCIES
   rack
   rake
   rspec
-  torquebox (= 4.x.incremental.221)!
+  torquebox (= 4.x.incremental.221)
   webmachine
   webmachine-test
   yahns
