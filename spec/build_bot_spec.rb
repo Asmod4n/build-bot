@@ -4,10 +4,8 @@ describe BuildBot do
   include Webmachine::Test
 
   describe BuildBot::Utils do
-    describe '::constantize' do
-      it 'Constantizes Strings' do
-        expect(BuildBot::Utils::constantize('BuildBot::Utils')).to eq BuildBot::Utils
-      end
+    it 'Constantizes Strings' do
+      expect(BuildBot::Utils::constantize('BuildBot::Utils')).to eq BuildBot::Utils
     end
   end
 
