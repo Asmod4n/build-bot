@@ -12,17 +12,22 @@ RSpec.configure do |config|
   end
 end
 
-shared_context "default resource" do
+shared_context 'webmachine/app' do
+  include Webmachine::Test
+  let(:app) { BuildBot::Application }
+end
+
+shared_context 'webmachine/resource' do
   let(:method) { 'GET' }
-  let(:uri) { URI.parse("http://localhost/") }
+  let(:uri) { URI.parse('http://localhost/') }
   let(:headers) { Webmachine::Headers.new }
-  let(:body) { "" }
+  let(:body) { '' }
   let(:req) { Webmachine::Request.new(method, uri, headers, body) }
   let(:resp) { Webmachine::Response.new }
   let(:resource_class) do
-    Class.new(Webmachine::Resource) do
+    Class.new(BuildBot::Resource) do
       def to_html
-        "<html><body>Hello, world!</body></html>"
+        '<html><body>Hello, world!</body></html>'
       end
     end
   end
