@@ -5,7 +5,6 @@ gemspec
 gem 'pry', group: :development
 
 group :test do
-  gem 'rack'
   gem 'rake'
   gem 'rspec'
   gem 'webmachine-test'
@@ -23,5 +22,6 @@ platforms :jruby do
 end
 
 gem 'octokit'
+gem 'rack'
 gem 'webmachine'
 gem 'multi_json'

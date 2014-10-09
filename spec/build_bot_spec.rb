@@ -20,7 +20,6 @@ describe BuildBot do
   end
 
   describe BuildBot::Resource do
-
     include_context 'webmachine/resource'
     it 'is a Webmachine::Resource' do
       expect(described_class.new(req, resp)).to be_a Webmachine::Resource

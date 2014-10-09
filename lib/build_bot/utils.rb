@@ -1,5 +1,4 @@
-﻿# :nocov:
-module BuildBot
+﻿module BuildBot
   module Utils
     module_function
     def constantize(camel_cased_word)
@@ -29,4 +28,3 @@ module BuildBot
     end
   end
 end
-# :nocov:

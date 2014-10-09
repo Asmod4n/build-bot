@@ -1,5 +1,4 @@
-﻿require 'bundler/setup'
-require 'webmachine/test'
+﻿require 'webmachine/test'
 require 'build_bot'
 
 RSpec.configure do |config|
