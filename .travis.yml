@@ -19,3 +19,6 @@ matrix:
 
 notifications:
   webhooks: https://xn--honsh-pfb.beskow.de/travis
+
+before_install:
+  - ./install_libsodium.sh

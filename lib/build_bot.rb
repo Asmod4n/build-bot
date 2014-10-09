@@ -1,4 +1,4 @@
-﻿require 'octokit'
+﻿require 'sodium'
 require 'webmachine'
 require 'openssl'
 require 'multi_json'
