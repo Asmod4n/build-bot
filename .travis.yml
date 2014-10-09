@@ -9,7 +9,6 @@ rvm:
   - rbx-2
   - ruby-head
   - jruby-head
-  - rbx-head
 
 jdk: oraclejdk8
 
@@ -17,4 +16,3 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
-    - rvm: rbx-head
