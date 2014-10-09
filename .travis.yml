@@ -12,4 +12,4 @@ rvm:
 
 jdk: oraclejdk8
 
-install: echo `openssl version`
+before_install: openssl version
