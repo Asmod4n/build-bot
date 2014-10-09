@@ -3,7 +3,7 @@ require_relative '../resource'
 require 'openssl'
 require 'multi_json'
 
-$octokit = Octokit::Client.new(:access_token => ENV['OCTOKIT_ACCESS_TOKEN'])
+$octokit = Octokit::Client.new(access_token: ENV['OCTOKIT_ACCESS_TOKEN'])
 
 module BuildBot
   module Resources

@@ -1,7 +1,5 @@
 ﻿require 'bundler/setup'
 require 'webmachine/test'
-require 'coveralls'
-Coveralls.wear!
 require 'build_bot'
 
 RSpec.configure do |config|
