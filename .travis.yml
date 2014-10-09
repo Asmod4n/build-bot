@@ -5,7 +5,7 @@ rvm:
   - ruby-head
   - 1.9.3
   - 2.0.0
-  - ruby
+  - ruby-2
   - rbx-2
   - jruby
 
