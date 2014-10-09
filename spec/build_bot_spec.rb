@@ -38,4 +38,15 @@ describe BuildBot do
       expect(response.code).to eq 204
     end
   end
+
+  describe BuildBot::Resources::Travis do
+    include_context 'webmachine/app'
+    it 'processes JSON' do
+      header(described_class::AUTHORIZATION, Digest::SHA2.hexdigest("Asmod4n/build-bot#{described_class::TRAVIS_TOKEN}"))
+      body(URI.encode_www_form(payload: '{}'))
+      post('/travis')
+      expect(response.body).to be_nil
+      expect(response.code).to eq 204
+    end
+  end
 end
