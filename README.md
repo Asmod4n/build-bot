@@ -1,2 +1,2 @@
-﻿deploy-bot
+deploy-bot
 ==========

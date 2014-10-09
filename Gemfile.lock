@@ -12,27 +12,23 @@ GEM
     as-notifications (1.0.1)
     coderay (1.1.0)
     diff-lcs (1.2.5)
-    ethon (0.7.1)
-      ffi (>= 1.3.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
-    faraday-http-cache (0.4.2)
-      faraday (~> 0.8)
-    ffi (1.9.5)
+    ffi (1.9.5-java)
     i18n (0.6.11)
-    kgio (2.9.2)
-    kgio-sendfile (1.2.1.1)
+    jrjackson (0.2.7)
+    jruby-openssl (0.9.5-java)
     method_source (0.8.2)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     octokit (3.4.0)
       sawyer (~> 0.5.3)
-    pry (0.10.1)
+    pry (0.10.1-java)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+      spoon (~> 0.0)
     rack (1.5.2)
-    raindrops (0.13.0)
     rake (10.3.2)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
@@ -49,33 +45,31 @@ GEM
     sawyer (0.5.5)
       addressable (~> 2.3.5)
       faraday (~> 0.8, < 0.10)
-    sleepy_penguin (3.3.0)
     slop (3.6.0)
-    typhoeus (0.6.9)
-      ethon (>= 0.7.1)
-    unicorn (4.8.3)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
+    spoon (0.0.4)
+      ffi
+    torquebox (4.x.incremental.221-java)
+      torquebox-core (= 4.x.incremental.221)
+      torquebox-scheduling (= 4.x.incremental.221)
+      torquebox-web (= 4.x.incremental.221)
+    torquebox-core (4.x.incremental.221-java)
+    torquebox-scheduling (4.x.incremental.221-java)
+      torquebox-core (= 4.x.incremental.221)
+    torquebox-web (4.x.incremental.221-java)
+      rack (>= 1.4.0, < 2.0)
+      torquebox-core (= 4.x.incremental.221)
     webmachine (1.2.2)
       as-notifications (~> 1.0)
       i18n (>= 0.4.0)
       multi_json
     webmachine-test (0.2.1)
       webmachine
-    yahns (1.3.1)
-      kgio (~> 2.9)
-      kgio-sendfile (~> 1.2)
-      sleepy_penguin (~> 3.2)
-      unicorn (~> 4.6, >= 4.6.3)
-    yajl-ruby (1.2.1)
 
 PLATFORMS
-  ruby
+  java
 
 DEPENDENCIES
   build_bot!
-  faraday-http-cache
   jrjackson
   jruby-openssl
   multi_json
@@ -85,7 +79,6 @@ DEPENDENCIES
   rake
   rspec
   torquebox (= 4.x.incremental.221)!
-  typhoeus
   webmachine
   webmachine-test
   yahns

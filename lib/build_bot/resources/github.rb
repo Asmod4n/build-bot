@@ -1,15 +1,7 @@
-﻿require 'faraday/http_cache'
-require 'typhoeus/adapters/faraday'
-require 'octokit'
+﻿require 'octokit'
 require_relative '../resource'
 require 'openssl'
 require 'multi_json'
-
-Octokit.middleware = Faraday::RackBuilder.new do |builder|
-  builder.use :http_cache
-  builder.use Octokit::Response::RaiseError
-  builder.adapter :typhoeus
-end
 
 $octokit = Octokit::Client.new(:access_token => ENV['OCTOKIT_ACCESS_TOKEN'])
 
