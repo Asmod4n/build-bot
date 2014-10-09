@@ -7,15 +7,15 @@ module BuildBot
   module Resources
     class Travis < Resource
       TRAVIS_TOKEN = ENV['TRAVIS_TOKEN']
-      AUTHORIZATION = 'Authorization'.freeze
 
       def allowed_methods
         [:POST.to_s]
       end
 
       def is_authorized?(auth)
-        return false unless request.headers[AUTHORIZATION]
-        Digest::SHA2.hexdigest("Asmod4n/build-bot#{TRAVIS_TOKEN}") == request.headers[AUTHORIZATION]
+        return false unless auth
+        puts auth
+        Digest::SHA2.hexdigest("Asmod4n/build-bot#{TRAVIS_TOKEN}") == auth
       end
 
       def process_post
