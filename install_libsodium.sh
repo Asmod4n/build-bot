@@ -1,4 +1,4 @@
-﻿#!/bin/sh
+#!/bin/sh
 set -ex
 LIBSODIUM_RELEASE="1.0.0"
 gpg --keyserver hkp://keys.gnupg.net --recv-keys 1CDEA439
