@@ -1,6 +1,5 @@
 ﻿require 'sodium'
 require 'webmachine'
-require 'openssl'
 require 'multi_json'
 
 module BuildBot

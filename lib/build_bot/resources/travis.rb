@@ -22,9 +22,13 @@ module BuildBot
       end
 
       def process_post
-        body = Hash[URI.decode_www_form(request.body.to_s)]
-        puts MultiJson.load(body['payload'])
-        true
+        if request.has_body?
+          body = Hash[URI.decode_www_form(request.body.to_s)]
+          puts MultiJson.load(body['payload'])
+          true
+        else
+          400
+        end
       rescue MultiJson::ParseError
         400
       end
