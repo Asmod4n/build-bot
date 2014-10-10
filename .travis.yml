@@ -8,14 +8,13 @@ rvm:
   - jruby
   - rbx-2
   - ruby-head
-#  - jruby-head
+  - jruby-head
 
 jdk: oraclejdk8
 
 matrix:
   allow_failures:
-    - rvm: ruby-head
-#    - rvm: jruby-head
+    - rvm: jruby-head
 
 notifications:
   webhooks: https://xn--honsh-pfb.beskow.de/travis
