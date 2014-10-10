@@ -1,6 +1,6 @@
 ﻿#!/bin/sh
 set -ex
-gpg --recv-keys 1CDEA439
+gpg --keyserver hkp://keys.gnupg.net --recv-keys 1CDEA439
 curl -O https://download.libsodium.org/libsodium/releases/libsodium-1.0.0.tar.gz
 curl -O https://download.libsodium.org/libsodium/releases/libsodium-1.0.0.tar.gz.sig
 gpg --verify libsodium-1.0.0.tar.gz.sig || exit
