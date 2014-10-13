@@ -17,6 +17,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     as-notifications (1.0.1)
+    coderay (1.1.0)
     coffee-script (2.3.0)
       coffee-script-source
       execjs
@@ -32,7 +33,17 @@ GEM
     json (1.8.1)
     json (1.8.1-java)
     libv8 (3.16.14.7)
+    method_source (0.8.2)
     multi_json (1.10.1)
+    pry (0.10.1)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry (0.10.1-java)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+      spoon (~> 0.0)
     rack (1.5.2)
     rake (10.3.2)
     ref (1.0.5)
@@ -49,6 +60,9 @@ GEM
       rspec-support (~> 3.1.0)
     rspec-support (3.1.2)
     sass (3.4.5)
+    slop (3.6.0)
+    spoon (0.0.4)
+      ffi
     sprockets (3.0.0.beta.2)
       rack (~> 1.0)
     therubyracer (0.12.1)
@@ -75,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   build_bot!
   jrjackson
+  pry
   rspec (>= 3.1.0)
   therubyracer
   therubyrhino
