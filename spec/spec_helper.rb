@@ -1,5 +1,6 @@
-﻿ENV['GITHUB_SECRET'] = '123'
-ENV['TRAVIS_TOKEN'] = '123'
+﻿ENV['GITHUB_SECRET'] ||= '123'
+ENV['TRAVIS_TOKEN'] ||= '123'
+ENV['REPOSITORY'] ||= 'Asmod4n/build-bot'
 
 require 'webmachine/test'
 require 'build_bot'

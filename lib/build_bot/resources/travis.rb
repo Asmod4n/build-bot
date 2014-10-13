@@ -8,17 +8,17 @@ module BuildBot
   module Resources
     class Travis < Resource
       TRAVIS_TOKEN = ENV['TRAVIS_TOKEN'].freeze
-      DIGEST = Digest::SHA2.hexdigest("Asmod4n/build-bot#{TRAVIS_TOKEN}").freeze
-      DIGEST_SIZE = DIGEST.bytesize.freeze
+      REPOSITORY = ENV['REPOSITORY'].freeze
+      DIGEST = Digest::SHA2.hexdigest("#{REPOSITORY}#{TRAVIS_TOKEN}").freeze
 
       def allowed_methods
         [:POST.to_s]
       end
 
-      def is_authorized?(auth)
-        return false unless auth
-        puts auth
-        DIGEST_SIZE == auth.bytesize && Sodium.memcmp(DIGEST, auth, DIGEST_SIZE) == 0
+      def is_authorized?(authorization_header = nil)
+        return false unless authorization_header
+        puts authorization_header
+        DIGEST.bytesize == authorization_header.bytesize && Sodium.memcmp(DIGEST, authorization_header, DIGEST.bytesize) == 0
       end
 
       def process_post
