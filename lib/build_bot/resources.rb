@@ -7,7 +7,7 @@ module BuildBot
       Dir['*.rb'].each do |resource|
         require_relative "resources/#{resource}"
         path = File::basename(resource, '.rb')
-        add [path], Utils::constantize("BuildBot::Resources::#{path.capitalize!}")
+        add [path], Utils::constantize("BuildBot::Resources::#{path.capitalize}")
       end
     end
   end

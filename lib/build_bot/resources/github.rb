@@ -1,6 +1,5 @@
 ﻿require_relative '../resource'
 require 'openssl'
-require 'uri'
 require 'sodium'
 require 'multi_json'
 
