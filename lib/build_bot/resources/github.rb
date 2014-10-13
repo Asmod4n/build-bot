@@ -7,9 +7,8 @@ require 'multi_json'
 module BuildBot
   module Resources
     class Github < Resource
-      DIGEST = 'sha1'.freeze
       DIGEST_MATCH = /^sha1=([0-9a-f]{40})$/.freeze
-      HMAC_DIGEST = OpenSSL::Digest.new(DIGEST)
+      HMAC_DIGEST = OpenSSL::Digest.new('sha1')
       SECRET = ENV['GITHUB_SECRET'].freeze
       X_HUB_SIGNATURE = 'x-hub-signature'.freeze
       X_GITHUB_EVENT = 'x-github-event'.freeze
@@ -27,7 +26,7 @@ module BuildBot
             digest << body
           end
           digest = digest.hexdigest
-          digest.bytesize == signature.bytesize && Sodium.memcmp(digest, signature, digest.bytesize) == 0
+          digest.bytesize == signature.bytesize && Sodium::memcmp(digest, signature, digest.bytesize) == 0
         else
           400
         end
@@ -36,7 +35,7 @@ module BuildBot
       end
 
       def process_post
-        @payload = MultiJson.load(request.body.to_s)
+        @payload = MultiJson::load(request.body.to_s)
         puts request.headers[X_GITHUB_EVENT]
         puts @payload
         true

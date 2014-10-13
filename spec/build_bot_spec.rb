@@ -31,7 +31,7 @@ describe BuildBot do
     it 'processes JSON' do
       payload = '{}'
       signature = OpenSSL::HMAC.hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, payload)
-      header(described_class::X_HUB_SIGNATURE, "#{described_class::DIGEST}=#{signature}")
+      header(described_class::X_HUB_SIGNATURE, "#{described_class::HMAC_DIGEST.name.downcase}=#{signature}")
       body(Array(payload))
       post('/github')
       expect(response.body).to be_nil

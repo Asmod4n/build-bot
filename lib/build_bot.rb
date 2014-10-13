@@ -1,6 +1,8 @@
-﻿require 'sodium'
+﻿require_relative 'monkey_patching'
+require 'sodium'
 require 'webmachine'
 require 'multi_json'
+require 'sprockets'
 
 module BuildBot
 end
