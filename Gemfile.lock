@@ -31,9 +31,11 @@ GEM
     jrjackson (0.2.7)
     json (1.8.1)
     json (1.8.1-java)
+    libv8 (3.16.14.7)
     multi_json (1.10.1)
     rack (1.5.2)
     rake (10.3.2)
+    ref (1.0.5)
     rspec (3.1.0)
       rspec-core (~> 3.1.0)
       rspec-expectations (~> 3.1.0)
@@ -49,6 +51,12 @@ GEM
     sass (3.4.5)
     sprockets (3.0.0.beta.2)
       rack (~> 1.0)
+    therubyracer (0.12.1)
+      libv8 (~> 3.16.14.0)
+      ref
+    therubyrhino (2.0.4)
+      therubyrhino_jar (>= 1.7.3)
+    therubyrhino_jar (1.7.4)
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -68,5 +76,7 @@ DEPENDENCIES
   build_bot!
   jrjackson
   rspec (>= 3.1.0)
+  therubyracer
+  therubyrhino
   webmachine-test (>= 0.2.1)
   yajl-ruby

@@ -9,78 +9,80 @@ module ExecJS
 end
 
 if defined?(::Java)
-  require 'execjs/runtime'
-  require 'multi_json'
-  require 'execjs/module'
+  require 'java'
+  java_version = Gem::Version.new(java::lang::System::getProperties['java.specification.version'])
+  if java_version >= Gem::Version.new('1.8')
+    require 'execjs/runtime'
+    require 'multi_json'
+    require 'execjs/module'
 
-  module ExecJS
-    class NashornRuntime < Runtime
-      NASHORN = 'nashorn'.freeze
-      EMPTY_STRING = ''.freeze
+    module ExecJS
+      class NashornRuntime < Runtime
+        NASHORN = 'nashorn'.freeze
+        EMPTY_STRING = ''.freeze
 
-      class Context < Runtime::Context
-        def initialize(runtime, source = EMPTY_STRING)
-          @nashorn_context = javax.script.ScriptEngineManager.new.getEngineByName(NASHORN)
+        class Context < Runtime::Context
+          def initialize(runtime, source = EMPTY_STRING)
+            @nashorn_context = javax::script::ScriptEngineManager.new.getEngineByName(NASHORN)
 
-          exec source
-        end
+            exec source
+          end
 
-        def exec(source, options = nil)
-          src = encode(source)
+          def exec(source, options = nil)
+            src = encode(source)
 
-          unless src.empty?
-            eval "(function(){#{src}})()"
+            unless src.empty?
+              eval "(function(){#{src}})()"
+            end
+          end
+
+          def eval(source, options = nil)
+            src = encode(source)
+
+            unless src.empty?
+              MultiJson::load(@nashorn_context.eval("JSON.stringify([#{src}])"))[0]
+            end
+          rescue Java::JavaxScript::ScriptException => e
+            if e.message =~ /^\<eval\>/
+              raise RuntimeError, e.message
+            else
+              raise ProgramError, e.message
+            end
+          end
+
+          def call(properties, *args)
+            eval "#{properties}.apply(this, #{MultiJson::dump(args)})"
           end
         end
 
-        def eval(source, options = nil)
-          src = encode(source)
-
-          unless src.empty?
-            MultiJson::load(@nashorn_context.eval("JSON.stringify([#{src}])"))[0]
-          end
-        rescue Java::JavaxScript::ScriptException => e
-          if e.message =~ /^\<eval\>/
-            raise RuntimeError, e.message
-          else
-            raise ProgramError, e.message
-          end
+        def name
+          'nashorn (Java 8)'
         end
 
-        def call(properties, *args)
-          eval "#{properties}.apply(this, #{MultiJson::dump(args)})"
+        def available?
+          true
         end
-      end
-
-      def name
-        'nashorn (Java 8)'
-      end
-
-      def available?
-        javax.script.ScriptEngineManager.new.getEngineByName(NASHORN) != nil
-      rescue
-        false
       end
     end
-  end
 
-  require 'execjs/runtimes'
+    require 'execjs/runtimes'
 
-  module ExecJS
-    module Runtimes
-      Nashorn = NashornRuntime.new
-      def self.runtimes
-        @runtimes ||= [
-          RubyRacer,
-          Nashorn,
-          RubyRhino,
-          Johnson,
-          Mustang,
-          Node,
-          JavaScriptCore,
-          SpiderMonkey,
-          JScript
-        ]
+    module ExecJS
+      module Runtimes
+        Nashorn = NashornRuntime.new
+        def self.runtimes
+          @runtimes ||= [
+            Nashorn,
+            RubyRacer,
+            RubyRhino,
+            Johnson,
+            Mustang,
+            Node,
+            JavaScriptCore,
+            SpiderMonkey,
+            JScript
+          ]
+        end
       end
     end
   end
