@@ -10,9 +10,18 @@ module BuildBot
       REPOSITORY = ENV['REPOSITORY'].freeze
       TRAVIS_TOKEN = ENV['TRAVIS_TOKEN'].freeze
       DIGEST = Digest::SHA2::hexdigest("#{REPOSITORY}#{TRAVIS_TOKEN}").freeze
+      CONTENT_TYPE = 'application/x-www-form-urlencoded'.freeze
 
       def allowed_methods
         [:POST.to_s]
+      end
+
+      def malformed_request?
+        !request.has_body?
+      end
+
+      def known_content_type?(content_type = nil)
+        content_type == CONTENT_TYPE
       end
 
       def is_authorized?(authorization_header = nil)
@@ -22,14 +31,10 @@ module BuildBot
       end
 
       def process_post
-        if request.has_body?
-          body = Hash[URI::decode_www_form(request.body.to_s)]
-          puts MultiJson::load(body['payload'])
-          true
-        else
-          400
-        end
-      rescue MultiJson::ParseError
+        body = Hash[URI::decode_www_form(request.body.to_s)]
+        puts MultiJson::load(body['payload'])
+        true
+      rescue ArgumentError, MultiJson::ParseError
         400
       end
     end

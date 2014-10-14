@@ -11,26 +11,27 @@ module BuildBot
       SECRET = ENV['GITHUB_SECRET'].freeze
       X_HUB_SIGNATURE = 'x-hub-signature'.freeze
       X_GITHUB_EVENT = 'x-github-event'.freeze
+      CONTENT_TYPE = 'application/json'.freeze
 
       def allowed_methods
         [:POST.to_s]
       end
 
+      def malformed_request?
+        !request.has_body? ||!(@signature = DIGEST_MATCH.match(request.headers[X_HUB_SIGNATURE])[1])
+      end
+
+      def known_content_type?(content_type = nil)
+        content_type == CONTENT_TYPE
+      end
+
       def is_authorized?(auth = nil)
-        return false unless request.headers[X_HUB_SIGNATURE] =~ DIGEST_MATCH
-        signature = $1
-        if request.has_body?
-          digest = OpenSSL::HMAC.new(SECRET, HMAC_DIGEST)
-          request.body.each do |body|
-            digest << body
-          end
-          digest = digest.hexdigest
-          digest.bytesize == signature.bytesize && Sodium::memcmp(digest, signature, digest.bytesize) == 0
-        else
-          400
+        digest = OpenSSL::HMAC.new(SECRET, HMAC_DIGEST)
+        request.body.each do |body|
+          digest << body
         end
-      rescue ArgumentError
-        400
+        digest = digest.hexdigest
+        digest.bytesize == @signature.bytesize && Sodium::memcmp(digest, @signature, digest.bytesize) == 0
       end
 
       def process_post

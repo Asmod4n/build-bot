@@ -31,7 +31,8 @@ describe BuildBot do
     it 'processes JSON' do
       payload = '{}'
       signature = OpenSSL::HMAC::hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, payload)
-      header(described_class::X_HUB_SIGNATURE, "#{described_class::HMAC_DIGEST.name.downcase}=#{signature}")
+      header('Content-Type', described_class::CONTENT_TYPE)
+      header('X-Hub-Signature', "#{described_class::HMAC_DIGEST.name.downcase}=#{signature}")
       body(Array(payload))
       post('/github')
       expect(response.body).to be_nil
@@ -43,7 +44,8 @@ describe BuildBot do
     include_context 'webmachine/app'
     it 'processes JSON' do
       header('Authorization', Digest::SHA2::hexdigest("#{described_class::REPOSITORY}#{described_class::TRAVIS_TOKEN}"))
-      body(URI.encode_www_form(payload: '{}'))
+      header('Content-Type', described_class::CONTENT_TYPE)
+      body(URI::encode_www_form(payload: '{}'))
       post('/travis')
       expect(response.body).to be_nil
       expect(response.code).to eq 204

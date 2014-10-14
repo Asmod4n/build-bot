@@ -19,10 +19,9 @@ if defined?(::Java)
     module ExecJS
       class NashornRuntime < Runtime
         NASHORN = 'nashorn'.freeze
-        EMPTY_STRING = ''.freeze
 
         class Context < Runtime::Context
-          def initialize(runtime, source = EMPTY_STRING)
+          def initialize(runtime, source = '')
             @nashorn_context = javax::script::ScriptEngineManager.new.getEngineByName(NASHORN)
 
             exec source
