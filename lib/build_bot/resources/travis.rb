@@ -16,10 +16,6 @@ module BuildBot
         [:POST.to_s]
       end
 
-      def malformed_request?
-        !request.has_body?
-      end
-
       def known_content_type?(content_type = nil)
         content_type == CONTENT_TYPE
       end

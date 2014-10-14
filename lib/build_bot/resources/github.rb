@@ -18,7 +18,7 @@ module BuildBot
       end
 
       def malformed_request?
-        !request.has_body? ||!(@signature = DIGEST_MATCH.match(request.headers[X_HUB_SIGNATURE])[1])
+        !(@signature = DIGEST_MATCH.match(request.headers[X_HUB_SIGNATURE])[1])
       end
 
       def known_content_type?(content_type = nil)
