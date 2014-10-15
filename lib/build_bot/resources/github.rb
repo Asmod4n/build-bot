@@ -12,9 +12,10 @@ module BuildBot
       X_HUB_SIGNATURE = 'x-hub-signature'.freeze
       X_GITHUB_EVENT = 'x-github-event'.freeze
       CONTENT_TYPE = 'application/json'.freeze
+      ALLOWED_METHODS = [:POST.to_s].freeze
 
       def allowed_methods
-        [:POST.to_s]
+        ALLOWED_METHODS
       end
 
       def malformed_request?

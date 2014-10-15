@@ -11,9 +11,10 @@ module BuildBot
       TRAVIS_TOKEN = ENV['TRAVIS_TOKEN'].freeze
       DIGEST = FFI::MemoryPointer.from_string(Digest::SHA2::hexdigest("#{REPOSITORY}#{TRAVIS_TOKEN}"))
       CONTENT_TYPE = 'application/x-www-form-urlencoded'.freeze
+      ALLOWED_METHODS = [:POST.to_s].freeze
 
       def allowed_methods
-        [:POST.to_s]
+        ALLOWED_METHODS
       end
 
       def known_content_type?(content_type = nil)
