@@ -1,4 +1,4 @@
-﻿require 'execjs/encoding'
+require 'execjs/encoding'
 
 module ExecJS
   module Encoding
@@ -90,25 +90,32 @@ end
 require 'coffee_script'
 
 module CoffeeScript
-  WRAPPER = <<-JS
-    (function(script, options) {
-      try {
-        return CoffeeScript.compile(script, options);
-      } catch (err) {
-        if (err instanceof SyntaxError && err.location) {
-          throw new SyntaxError([
-            err.filename || "[stdin]",
-            err.location.first_line + 1,
-            err.location.first_column + 1
-          ].join(":") + ": " + err.message)
-        } else {
-          throw err;
-        }
-      }
-    })
-  JS
+  module Source
+    def self.contents
+      return @contents if @contents
+      wrapper = <<-JS
+        ;function CompileCoffee(script, options) {
+          try {
+            return CoffeeScript.compile(script, options);
+          } catch (err) {
+            if (err instanceof SyntaxError && err.location) {
+              throw new SyntaxError([
+                err.filename || "[stdin]",
+                err.location.first_line + 1,
+                err.location.first_column + 1
+              ].join(":") + ": " + err.message)
+            } else {
+              throw err;
+            }
+          }
+        };
+      JS
 
-  WRAPPER.freeze
+      @contents = File.read(path) + wrapper
+    end
+  end
+
+  COMPILE_COFFEE = 'CompileCoffee'.freeze
 
   class << self
     def compile(script, options = {})
@@ -121,8 +128,7 @@ module CoffeeScript
         options[:bare] = false
       end
 
-      Source.context.call(WRAPPER, script, options)
+      Source.context.call(COMPILE_COFFEE, script, options)
     end
   end
 end
-
