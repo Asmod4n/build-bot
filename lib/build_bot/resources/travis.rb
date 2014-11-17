@@ -9,13 +9,8 @@ module BuildBot
     class Travis < Resource
       REPOSITORY = ENV['REPOSITORY'].freeze
       TRAVIS_TOKEN = ENV['TRAVIS_TOKEN'].freeze
-      DIGEST = FFI::MemoryPointer.from_string(Digest::SHA2::hexdigest("#{REPOSITORY}#{TRAVIS_TOKEN}"))
+      DIGEST = FFI::MemoryPointer.from_string(Digest::SHA2.hexdigest("#{REPOSITORY}#{TRAVIS_TOKEN}"))
       CONTENT_TYPE = 'application/x-www-form-urlencoded'.freeze
-      ALLOWED_METHODS = [:POST.to_s].freeze
-
-      def allowed_methods
-        ALLOWED_METHODS
-      end
 
       def known_content_type?(content_type = nil)
         content_type == CONTENT_TYPE
@@ -24,7 +19,7 @@ module BuildBot
       def is_authorized?(authorization_header = nil)
         return false unless authorization_header
         puts authorization_header
-        DIGEST.size - 1 == authorization_header.bytesize && Sodium::memcmp(DIGEST, authorization_header, DIGEST.size) == 0
+        Sodium.memcmp(DIGEST, authorization_header, DIGEST.size - 1).zero?
       end
 
       def process_post

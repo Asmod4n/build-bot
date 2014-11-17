@@ -9,7 +9,7 @@ describe BuildBot do
 
   describe BuildBot::Utils do
     it 'Constantizes Strings' do
-      expect(BuildBot::Utils::constantize('BuildBot::Utils')).to eq BuildBot::Utils
+      expect(BuildBot::Utils.constantize('BuildBot::Utils')).to eq BuildBot::Utils
     end
   end
 
@@ -30,7 +30,7 @@ describe BuildBot do
     include_context 'webmachine/app'
     it 'processes JSON' do
       payload = '{}'
-      signature = OpenSSL::HMAC::hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, payload)
+      signature = OpenSSL::HMAC.hexdigest(described_class::HMAC_DIGEST, described_class::SECRET, payload)
       header('Content-Type', described_class::CONTENT_TYPE)
       header('X-Hub-Signature', "#{described_class::HMAC_DIGEST.name.downcase}=#{signature}")
       body(Array(payload))
@@ -43,9 +43,9 @@ describe BuildBot do
   describe BuildBot::Resources::Travis do
     include_context 'webmachine/app'
     it 'processes JSON' do
-      header('Authorization', Digest::SHA2::hexdigest("#{described_class::REPOSITORY}#{described_class::TRAVIS_TOKEN}"))
+      header('Authorization', Digest::SHA2.hexdigest("#{described_class::REPOSITORY}#{described_class::TRAVIS_TOKEN}"))
       header('Content-Type', described_class::CONTENT_TYPE)
-      body(URI::encode_www_form(payload: '{}'))
+      body(URI.encode_www_form(payload: '{}'))
       post('/travis')
       expect(response.body).to be_nil
       expect(response.code).to eq 204

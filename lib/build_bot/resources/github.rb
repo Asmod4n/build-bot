@@ -12,11 +12,6 @@ module BuildBot
       X_HUB_SIGNATURE = 'x-hub-signature'.freeze
       X_GITHUB_EVENT = 'x-github-event'.freeze
       CONTENT_TYPE = 'application/json'.freeze
-      ALLOWED_METHODS = [:POST.to_s].freeze
-
-      def allowed_methods
-        ALLOWED_METHODS
-      end
 
       def malformed_request?
         return true unless (match = DIGEST_MATCH.match(request.headers[X_HUB_SIGNATURE]))
@@ -33,12 +28,11 @@ module BuildBot
         request.body.each do |body|
           digest << body
         end
-        digest = digest.hexdigest
-        digest.bytesize == @signature.bytesize && Sodium::memcmp(digest, @signature, digest.bytesize) == 0
+        Sodium.memcmp(digest.hexdigest, @signature, @signature.bytesize).zero?
       end
 
       def process_post
-        @payload = MultiJson::load(request.body.to_s)
+        @payload = MultiJson.load(request.body.to_s)
         puts request.headers[X_GITHUB_EVENT]
         puts @payload
         true

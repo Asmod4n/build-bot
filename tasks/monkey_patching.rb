@@ -1,4 +1,4 @@
-require 'execjs/encoding'
+﻿require 'execjs/encoding'
 
 module ExecJS
   module Encoding
@@ -10,7 +10,7 @@ end
 
 if defined?(::Java)
   require 'java'
-  java_version = Gem::Version.new(java::lang::System::getProperties['java.specification.version'])
+  java_version = Gem::Version.new(java.lang.System.getProperties['java.specification.version'])
   if java_version >= Gem::Version.new('1.8')
     require 'execjs/runtime'
     require 'multi_json'
@@ -22,7 +22,7 @@ if defined?(::Java)
 
         class Context < Runtime::Context
           def initialize(runtime, source = '')
-            @nashorn_context = javax::script::ScriptEngineManager.new.getEngineByName(NASHORN)
+            @nashorn_context = javax.script.ScriptEngineManager.new.getEngineByName(NASHORN)
 
             exec source
           end
@@ -39,7 +39,7 @@ if defined?(::Java)
             src = encode(source)
 
             unless src.empty?
-              MultiJson::load(@nashorn_context.eval("JSON.stringify([#{src}])"))[0]
+              MultiJson.load(@nashorn_context.eval("JSON.stringify([#{src}])"))[0]
             end
           rescue Java::JavaxScript::ScriptException => e
             if e.message =~ /^\<eval\>/
