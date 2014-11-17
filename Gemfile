@@ -9,8 +9,5 @@ end
 
 platforms :jruby do
   gem 'jrjackson'
-  java_version = Gem::Version.new(java.lang.System.getProperties['java.specification.version'])
-  if java_version < Gem::Version.new('1.8')
-    gem 'therubyrhino'
-  end
+  gem 'therubyrhino'
 end
